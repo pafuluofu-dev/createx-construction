@@ -1,0 +1,7 @@
+// Createx Construction — точка сборки стилей.
+// БЭМ: один блок — один файл (или тематическая группа в _sections).
+@use 'base';
+@use 'blocks/header';
+@use 'blocks/hero';
+@use 'blocks/sections';
+@use 'blocks/form-footer';

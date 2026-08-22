@@ -1,0 +1,106 @@
+@use '../variables' as *;
+
+.hero {
+  position: relative;
+  color: $color-white;
+
+  &__slide {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    padding: 120px 0 80px;
+    background:
+      linear-gradient(90deg, rgba($color-ink, 0.6) 0%, rgba($color-ink, 0.2) 65%, transparent),
+      $color-ink center / cover no-repeat;
+  }
+
+  // Фон слайда задаётся модификатором в стилях, а не inline-переменной:
+  // url() внутри custom property Chrome резолвит от базы ТАБЛИЦЫ СТИЛЕЙ, а
+  // Firefox — от документа; единственный кросс-браузерный путь — держать
+  // url() прямо в css, где '../assets' однозначен.
+  &__slide--crane { background-image:
+      linear-gradient(90deg, rgba($color-ink, 0.6) 0%, rgba($color-ink, 0.2) 65%, transparent),
+      url('../assets/img/hero-crane.jpg');
+  }
+
+  &__content { width: 100%; }
+
+  &__title {
+    max-width: 12ch;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  // Оранжевый маркер после первого слова, как крестик в логотипе.
+  &__title-accent {
+    display: inline-block;
+    width: 0.35em; height: 0.35em;
+    margin: 0 6px 4px;
+    background: $color-primary;
+  }
+
+  &__lede {
+    max-width: 470px;
+    margin-top: 24px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  &__pagination {
+    display: flex;
+    gap: 56px;
+    padding-top: 24px;
+    padding-bottom: 32px;
+  }
+
+  &__bullet {
+    position: relative;
+    padding: 0 0 12px;
+    border: 0;
+    background: none;
+    font-weight: 700;
+    font-size: 14px;
+    color: $color-muted;
+    transition: color $transition;
+
+    // Полоса-прогресс под номером активного слайда.
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 2px;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity $transition;
+    }
+
+    &--active {
+      color: $color-ink;
+      &::after { opacity: 1; }
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+
+    &--prev { left: 24px; }
+    &--next { right: 24px; }
+  }
+}
+
+@media (max-width: $bp-md) {
+  .hero {
+    &__arrow { display: none; }
+    &__pagination { gap: 32px; }
+  }
+}

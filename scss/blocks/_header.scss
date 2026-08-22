@@ -1,0 +1,121 @@
+@use '../variables' as *;
+
+.header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  padding: 24px 0;
+  background: rgba($color-white, 0.92);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__nav { flex: 1; }
+
+  &__contacts { flex-shrink: 0; }
+}
+
+.nav {
+  &__list {
+    display: flex;
+    gap: 40px;
+  }
+
+  &__link {
+    font-weight: 700;
+    font-size: 14px;
+    color: $color-ink;
+    transition: color $transition;
+
+    &:hover { color: $color-primary; }
+  }
+
+  // Бургер существует только на планшете/телефоне.
+  &__burger { display: none; }
+}
+
+.burger {
+  width: 44px; height: 44px;
+  border: 0;
+  background: none;
+  position: relative;
+
+  &__line,
+  &__line::before,
+  &__line::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    width: 24px; height: 2px;
+    background: $color-ink;
+    transition: transform $transition, opacity $transition;
+  }
+
+  &__line { top: 21px; }
+  &__line::before { content: ''; left: 0; top: -7px; }
+  &__line::after { content: ''; left: 0; top: 7px; }
+
+  [aria-expanded='true'] &__line { background: transparent; }
+  [aria-expanded='true'] &__line::before { transform: translateY(7px) rotate(45deg); }
+  [aria-expanded='true'] &__line::after { transform: translateY(-7px) rotate(-45deg); }
+}
+
+.contacts-list {
+  display: flex;
+  gap: 35px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.45;
+    color: $color-body;
+  }
+
+  &__link {
+    font-weight: 700;
+    color: $color-ink;
+    transition: color $transition;
+
+    &:hover { color: $color-primary; }
+  }
+}
+
+@media (max-width: $bp-lg) {
+  .header__contacts { display: none; }
+
+  .nav {
+    &__burger {
+      display: block;
+      margin-left: auto;
+    }
+
+    &__list {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: $color-white;
+      box-shadow: 0 20px 30px -10px rgba($color-ink, 0.15);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height $transition;
+    }
+
+    &--open &__list { max-height: 320px; }
+
+    &__item { border-top: 1px solid $color-bg-light; }
+
+    &__link {
+      display: block;
+      padding: 14px 15px;
+    }
+  }
+}

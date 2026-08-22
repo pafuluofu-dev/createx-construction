@@ -1,0 +1,215 @@
+@use '../variables' as *;
+
+// ---------- Формы ----------
+.form {
+  &--inline {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    max-width: 1030px;
+    margin: 0 auto;
+  }
+
+  &--card {
+    width: min(410px, 100%);
+    padding: 40px;
+    border-radius: 4px;
+    background: $color-white;
+    box-shadow: 0 40px 60px -30px rgba($color-ink, 0.3);
+    display: grid;
+    gap: 18px;
+  }
+
+  &__field {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+
+    &--grow { flex: 1.6; }
+  }
+
+  &__label {
+    font-size: 14px;
+    color: $color-body;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid $color-line;
+    border-radius: 4px;
+    background: $color-bg-light;
+    color: $color-ink;
+    transition: border-color $transition;
+
+    &::placeholder { color: $color-muted; }
+    &:focus { outline: none; border-color: $color-primary; }
+
+    // Ошибка валидации подсвечивается рамкой (см. js/main.js).
+    &--invalid { border-color: #ff4242; }
+
+    &--area { resize: vertical; min-height: 88px; }
+  }
+
+  &__consent {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  &__checkbox { accent-color: $color-primary; margin-top: 2px; }
+
+  &__submit { flex-shrink: 0; }
+  &__submit--wide { width: 100%; }
+}
+
+// ---------- Подвал ----------
+.footer {
+  background: $color-ink;
+  color: rgba($color-white, 0.7);
+  font-size: 14px;
+  padding: 80px 0 0;
+
+  &__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba($color-white, 0.12);
+  }
+
+  // Логотип в подвале — белая версия через инверсию (отдельного файла в
+  // выгрузке нет; крестик остаётся оранжевым за счёт hue-rotate нуля... нет:
+  // просто инвертируем светлоту тёмных букв).
+  &__logo { filter: brightness(0) invert(1); }
+
+  &__about { margin: 24px 0; max-width: 480px; }
+
+  &__cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    padding: 48px 0;
+  }
+
+  &__heading {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $color-white;
+    margin-bottom: 16px;
+  }
+
+  &__address p { margin-bottom: 8px; }
+
+  &__list { display: grid; gap: 10px; }
+
+  &__link {
+    transition: color $transition;
+    &:hover { color: $color-primary; }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid rgba($color-white, 0.12);
+  }
+
+  &__top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: none;
+    color: rgba($color-white, 0.7);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color $transition;
+
+    &:hover { color: $color-white; }
+    img { filter: brightness(0) invert(1); }
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+
+  &__link {
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba($color-white, 0.08);
+    transition: background $transition;
+
+    &:hover { background: $color-primary; }
+    img { filter: brightness(0) invert(1); }
+  }
+}
+
+.subscribe {
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $color-white;
+    margin-bottom: 16px;
+  }
+
+  &__row { display: flex; gap: 12px; }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: rgba($color-white, 0.12);
+    color: $color-white;
+
+    &::placeholder { color: rgba($color-white, 0.5); }
+    &:focus { outline: none; border-color: $color-primary; }
+  }
+
+  &__btn { padding: 12px 24px; }
+
+  &__note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba($color-white, 0.5);
+  }
+}
+
+// ---------- Адаптив общих секций ----------
+@media (max-width: $bp-lg) {
+  .services__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+  .news__grid { grid-template-columns: minmax(0, 1fr); }
+  .testimonials__inner { grid-template-columns: minmax(0, 1fr); }
+  .testimonials__photo { order: -1; width: 100%; max-height: 360px; }
+  .footer__top { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: $bp-md) {
+  .values__list { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .form--inline { flex-direction: column; align-items: stretch; }
+  .projects__head { flex-direction: column; align-items: flex-start; }
+  .request__inner { justify-content: center; }
+  .footer__cols { grid-template-columns: minmax(0, 1fr); }
+  .footer__bottom { flex-direction: column; }
+  .services__cta, .projects__cta, .news__cta { flex-direction: column; gap: 16px; }
+}
+
+@media (max-width: $bp-sm) {
+  .services__list { grid-template-columns: minmax(0, 1fr); }
+  .news-card:not(.news-card--big) { grid-template-columns: minmax(0, 1fr); }
+  .subscribe__row { flex-direction: column; }
+}

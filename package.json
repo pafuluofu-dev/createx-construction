@@ -1,0 +1,13 @@
+{
+  "name": "createx-construction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Createx Construction — вёрстка макета: БЭМ, семантика, Sass, ванильный JS",
+  "scripts": {
+    "dev": "sass --watch scss/main.scss css/main.css",
+    "build": "sass scss/main.scss css/main.css --style=compressed --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}
