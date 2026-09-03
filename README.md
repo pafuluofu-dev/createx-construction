@@ -1,6 +1,6 @@
 # Createx Construction
 
-Вёрстка макета [Createx Construction](https://erix319.github.io/createx-construction/) — главная страница.
+Вёрстка макета [Createx Construction](https://pafuluofu-dev.github.io/createx-construction/) — главная страница.
 
 - **БЭМ** — именование классов блок__элемент--модификатор, стили по блокам в `scss/blocks/`
 - **Семантика** — header/nav/main/section/article/footer, один h1, осмысленные alt
