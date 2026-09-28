@@ -58,8 +58,8 @@
   // ---------- Отзывы: перелистывание цитат ----------
   const QUOTES = [
     {
-      text: 'Ipsum aute sunt aliquip aute et occaecat. Anim minim do cillum eiusmod anim. Consectetur magna cillum consequat minim laboris cillum laboris voluptate minim proident exercitation ullamco.',
-      name: 'Shawn Edwards', position: 'Position, Company name',
+      text: 'We came to Createx with a half-finished shell and a deadline we could not move. The crew took over the site in a week and kept us posted every Friday. The building opened on the date we had promised our tenants.',
+      name: 'Shawn Edwards', position: 'Development Director, Edwards & Co',
     },
     {
       text: 'Createx delivered our office complex two weeks ahead of schedule without a single compromise on quality. Communication was outstanding from day one.',
